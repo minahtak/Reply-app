@@ -1,0 +1,11 @@
+{
+    "name": "replyapp",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build"
+    },
+    "dependencies": {
+        "next": "latest",
+        "openai": "latest"
+    }
+}

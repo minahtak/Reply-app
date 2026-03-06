@@ -38,9 +38,7 @@
             padding: env(safe-area-inset-top) 0 24px;
         }
 
-        .scroll::-webkit-scrollbar {
-            display: none;
-        }
+        .scroll::-webkit-scrollbar { display: none; }
 
         .hdr {
             padding: 20px 22px 4px;
@@ -79,7 +77,7 @@
             background: #fff;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 1px 8px rgba(0,0,0,0.06);
         }
 
         .card-label {
@@ -89,7 +87,7 @@
             letter-spacing: 0.9px;
             text-transform: uppercase;
             padding: 12px 14px 8px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
         }
 
         .msg-input-wrap {
@@ -128,9 +126,17 @@
             max-height: 96px;
         }
 
-        .msg-bubble-input::placeholder {
+        .msg-bubble-input::placeholder { color: #C0BCB7; }
+
+        .char-count {
+            font-size: 10px;
             color: #C0BCB7;
+            text-align: right;
+            padding: 0 14px 8px;
+            font-weight: 500;
         }
+
+        .char-count.warn { color: #FF5C35; }
 
         .mode-wrap {
             display: flex;
@@ -153,10 +159,7 @@
             white-space: nowrap;
         }
 
-        .mode-pill:active {
-            transform: scale(0.95);
-        }
-
+        .mode-pill:active { transform: scale(0.95); }
         .mode-pill.active {
             background: #1A1814;
             border-color: #1A1814;
@@ -184,10 +187,7 @@
             user-select: none;
         }
 
-        .tone-pill:active {
-            transform: scale(0.95);
-        }
-
+        .tone-pill:active { transform: scale(0.95); }
         .tone-pill.active {
             background: #FF5C35;
             border-color: #FF5C35;
@@ -198,7 +198,7 @@
             width: 100%;
             background: transparent;
             border: none;
-            padding: 10px 14px 12px;
+            padding: 10px 14px 4px;
             font-size: 13.5px;
             font-family: inherit;
             color: #1A1814;
@@ -208,9 +208,7 @@
             min-height: 64px;
         }
 
-        .ctx-textarea::placeholder {
-            color: #C0BCB7;
-        }
+        .ctx-textarea::placeholder { color: #C0BCB7; }
 
         .gen-btn {
             margin: 12px 16px 0;
@@ -226,14 +224,10 @@
             cursor: pointer;
             letter-spacing: -0.3px;
             transition: all 0.18s;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.16);
         }
 
-        .gen-btn:active {
-            transform: scale(0.98);
-            opacity: 0.88;
-        }
-
+        .gen-btn:active { transform: scale(0.98); opacity: 0.88; }
         .gen-btn:disabled {
             background: #E4E2DD;
             color: #B5B2AC;
@@ -247,7 +241,7 @@
             border-radius: 20px;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 1px 8px rgba(0,0,0,0.06);
             display: none;
         }
 
@@ -266,21 +260,12 @@
             animation: bop 1.1s infinite;
         }
 
-        .dots span:nth-child(2) {
-            animation-delay: .18s;
-        }
-
-        .dots span:nth-child(3) {
-            animation-delay: .36s;
-        }
+        .dots span:nth-child(2) { animation-delay: .18s; }
+        .dots span:nth-child(3) { animation-delay: .36s; }
 
         @keyframes bop {
-            0%, 60%, 100% {
-                transform: translateY(0)
-            }
-            30% {
-                transform: translateY(-7px)
-            }
+            0%, 60%, 100% { transform: translateY(0) }
+            30% { transform: translateY(-7px) }
         }
 
         .loading-txt {
@@ -289,9 +274,7 @@
             font-weight: 500;
         }
 
-        .results-wrap {
-            margin: 12px 16px 0;
-        }
+        .results-wrap { margin: 12px 16px 0; }
 
         .r-label {
             font-size: 10.5px;
@@ -308,36 +291,22 @@
             border-radius: 16px;
             padding: 14px 15px;
             margin-bottom: 8px;
-            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 1px 8px rgba(0,0,0,0.06);
             cursor: pointer;
             transition: all 0.15s;
             border: 1.5px solid transparent;
             animation: rise 0.28s ease both;
         }
 
-        .r-card:nth-child(2) {
-            animation-delay: .07s;
-        }
-
-        .r-card:nth-child(3) {
-            animation-delay: .14s;
-        }
+        .r-card:nth-child(2) { animation-delay: .07s; }
+        .r-card:nth-child(3) { animation-delay: .14s; }
 
         @keyframes rise {
-            from {
-                opacity: 0;
-                transform: translateY(10px)
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
+            from { opacity: 0; transform: translateY(10px) }
+            to { opacity: 1; transform: translateY(0) }
         }
 
-        .r-card:active {
-            transform: scale(0.98);
-        }
-
+        .r-card:active { transform: scale(0.98); }
         .r-card.copied {
             border-color: #2DC96D;
             background: #F6FDF9;
@@ -383,12 +352,21 @@
             display: none;
         }
 
-        .r-card.copied .r-copy {
-            display: none;
-        }
+        .r-card.copied .r-copy { display: none; }
+        .r-card.copied .r-copied-badge { display: block; }
 
-        .r-card.copied .r-copied-badge {
-            display: block;
+        /* 예산 초과 배너 */
+        .budget-banner {
+            margin: 10px 16px 0;
+            background: #FFF3F0;
+            border: 1.5px solid #FF5C35;
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #CC3A1A;
+            font-weight: 600;
+            text-align: center;
+            display: none;
         }
 
         .toast {
@@ -396,7 +374,7 @@
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%) translateY(12px);
-            background: rgba(26, 24, 20, 0.88);
+            background: rgba(26,24,20,0.88);
             color: #fff;
             padding: 9px 18px;
             border-radius: 50px;
@@ -417,7 +395,6 @@
 </head>
 
 <body>
-
     <div class="app-container">
         <div class="scroll" id="scroll">
 
@@ -429,13 +406,22 @@
                 </div>
             </div>
 
+            <!-- 예산 초과 시 표시 -->
+            <div class="budget-banner" id="budgetBanner">
+                ⚠️ 이번 달 사용량이 한도에 도달했어요. 내달 1일에 초기화됩니다.
+            </div>
+
             <div class="card">
                 <div class="card-label">받은 메세지 (선택)</div>
                 <div class="msg-input-wrap">
                     <div class="msg-avatar">🐱</div>
-                    <textarea class="msg-bubble-input" id="receivedMsg" placeholder="상대방 메세지를 붙여넣어 주세요 (없어도 돼요)"
-                        rows="2" oninput="autoResize(this)"></textarea>
+                    <!-- 최대 100자 제한 -->
+                    <textarea class="msg-bubble-input" id="receivedMsg"
+                        placeholder="상대방 메세지를 붙여넣어 주세요 (없어도 돼요)"
+                        rows="2" maxlength="100"
+                        oninput="autoResize(this); updateCharCount('receivedMsg', 'receivedCount', 100)"></textarea>
                 </div>
+                <div class="char-count" id="receivedCount">0 / 100</div>
             </div>
 
             <div class="card">
@@ -465,8 +451,12 @@
 
             <div class="card">
                 <div class="card-label">추가 설명 (선택)</div>
-                <textarea class="ctx-textarea" id="ctxInput" placeholder="예) 친구가 카페 가자고 했는데 사실 그냥 쉬고 싶어서 거절하고 싶어"
-                    rows="2" oninput="autoResize(this)"></textarea>
+                <!-- 최대 80자 제한 -->
+                <textarea class="ctx-textarea" id="ctxInput"
+                    placeholder="예) 친구가 카페 가자고 했는데 그냥 쉬고 싶어"
+                    rows="2" maxlength="80"
+                    oninput="autoResize(this); updateCharCount('ctxInput', 'ctxCount', 80)"></textarea>
+                <div class="char-count" id="ctxCount">0 / 80</div>
             </div>
 
             <button class="gen-btn" id="genBtn" onclick="generate()" disabled>
@@ -482,7 +472,7 @@
             <div style="height:32px"></div>
         </div>
 
-        <div class="toast" id="toast">✅ 복사됐어요!</div>
+        <div class="toast" id="toast">복사됐어요!</div>
     </div>
 
     <script>
@@ -490,20 +480,29 @@
         let selectedTone = 'warm';
 
         const modeLabels = {
-            refuse: '공손한 거절', ignore: '읽씹 해명',
-            excuse: '자연스러운 핑계', end: '대화 마무리',
-            awkward: '어색한 사이', formal: '격식체 변환',
-            compliment: '칭찬·관심에 자연스럽게 답장',
-            some: '썸 상대에게 설레고 자연스러운 답장'
+            refuse: '공손하게 거절하기',
+            ignore: '읽씹한 것 자연스럽게 해명하기',
+            excuse: '자연스러운 핑계 대기',
+            end: '대화 마무리하기',
+            awkward: '어색한 사이에 답장하기',
+            formal: '격식체로 답장하기',
+            compliment: '칭찬이나 관심에 자연스럽게 답장하기',
+            some: '썸 상대에게 설레고 자연스럽게 답장하기'
         };
         const toneLabels = {
-            warm: '따뜻하게', cool: '쿨하게',
-            sorry: '미안하게', cute: '귀엽게', short: '짧게'
+            warm: '따뜻하게', cool: '쿨하게', sorry: '미안하게', cute: '귀엽게', short: '짧게'
         };
 
         function autoResize(el) {
             el.style.height = 'auto';
             el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+        }
+
+        function updateCharCount(inputId, countId, max) {
+            const len = document.getElementById(inputId).value.length;
+            const el = document.getElementById(countId);
+            el.textContent = `${len} / ${max}`;
+            el.className = 'char-count' + (len >= max * 0.9 ? ' warn' : '');
         }
 
         function selectMode(el) {
@@ -533,8 +532,12 @@
         async function generate() {
             const received = document.getElementById('receivedMsg').value.trim();
             const context = document.getElementById('ctxInput').value.trim();
-            const modeLabel = modeLabels[selectedMode];
-            const toneLabel = toneLabels[selectedTone];
+
+            // user 프롬프트: 상황을 자연어로 전달 (품질 향상)
+            let prompt = '';
+            if (received) prompt += `상대방 메시지: "${received}"\n`;
+            if (context) prompt += `상황 설명: ${context}\n`;
+            prompt += `해야 할 것: ${modeLabels[selectedMode]}\n말투: ${toneLabels[selectedTone]}`;
 
             const btn = document.getElementById('genBtn');
             btn.disabled = true;
@@ -546,42 +549,30 @@
                 document.getElementById('loadingCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 80);
 
-            // 💡 AI 프롬프트 강화: 무조건 3개를 쓰게 하고 군더더기 말을 금지시켰습니다.
-            const prompt = `너는 한국어 카카오톡/문자 답장을 대신 써주는 AI야.
-${received ? `\n상대방이 보낸 메세지: "${received}"` : ''}
-상황 유형: ${modeLabel}
-말투: ${toneLabel}
-${context ? `추가 설명: ${context}` : ''}
-
-위 상황에 맞는 답장 3가지를 무조건 작성해줘.
-- 각각 뉘앙스가 조금씩 달라야 해
-- 실제 카톡처럼 짧고 자연스럽게
-- 다른 군더더기 말이나 설명은 절대 쓰지 마
-- 반드시 아래 형식으로만 3개를 모두 써줘:
-
-1. [첫 번째 답장]
-2. [두 번째 답장]
-3. [세 번째 답장]`;
-
             try {
                 const res = await fetch("/api/generate", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ prompt: prompt })
+                    body: JSON.stringify({ prompt })
                 });
 
                 const data = await res.json();
 
-                if (!res.ok) {
-                    console.error("서버에서 에러를 보냈어요:", data);
-                    throw new Error(data.error || "서버 에러 발생");
+                // 예산 초과 처리
+                if (res.status === 429) {
+                    document.getElementById('budgetBanner').style.display = 'block';
+                    document.getElementById('loadingCard').style.display = 'none';
+                    btn.disabled = true;
+                    btn.textContent = '이번 달 한도 초과';
+                    return;
                 }
 
-                const text = data.content[0].text;
-                renderResults(text);
+                if (!res.ok) throw new Error(data.error || '서버 에러');
+
+                renderResults(data.text);
 
             } catch (e) {
-                console.error("프론트엔드 에러 발생:", e);
+                console.error(e);
                 renderResults('');
             }
 
@@ -591,30 +582,14 @@ ${context ? `추가 설명: ${context}` : ''}
         }
 
         function parseResults(text) {
-            let cleanText = text.replace(/\*\*/g, '');
+            let clean = text.replace(/\*\*/g, '');
+            const parts = clean.split(/\n?[1-3][.)]\s*/);
+            let msgs = parts.map(p => p.replace(/\s+[1-3]$/, '').trim()).filter(Boolean);
 
-            // 💡 정규식 강화: 숫자가 어떤 형태로 오든 찰떡같이 쪼개줍니다.
-            const regex = /(?:^|\n|\s+)(?:1|2|3)[.)\]-]?\s*/;
-            let parts = cleanText.split(regex);
-
-            let msgs = [];
-            for (let part of parts) {
-                let msg = part.trim();
-                // 끝에 붙은 ' 2' 같은 찌꺼기 숫자 완벽 제거
-                msg = msg.replace(/\s+[1-3]$/, '');
-                if (msg) {
-                    msgs.push(msg);
-                }
-            }
-
-            // 💡 보험 추가: 만약 그래도 1개로 뭉쳤다면 줄바꿈 단위로 강제 분리합니다.
             if (msgs.length === 1) {
-                const fallbackParts = msgs[0].split(/\n+/);
-                if (fallbackParts.length >= 2) {
-                    msgs = fallbackParts.map(p => p.trim()).filter(Boolean);
-                }
+                const lines = msgs[0].split(/\n+/).map(p => p.trim()).filter(Boolean);
+                if (lines.length >= 2) msgs = lines;
             }
-
             return msgs.length > 0 ? msgs : [text];
         }
 
@@ -626,25 +601,21 @@ ${context ? `추가 설명: ${context}` : ''}
             }
             const msgs = parseResults(text);
             const tags = ['옵션 1', '옵션 2', '옵션 3'];
-            
-            // 💡 복사 에러 방지: HTML 태그에 들어가는 글자를 안전하게 암호화(encode) 처리했습니다.
             wrap.innerHTML = `
                 <div class="r-label">추천 답장 ${msgs.length}가지</div>
                 ${msgs.map((msg, i) => `
                 <div class="r-card" data-msg="${encodeURIComponent(msg)}" onclick="copyMsg(this)">
-                    <div class="r-tag">${tags[i] || `옵션 ${i + 1}`}</div>
+                    <div class="r-tag">${tags[i] || `옵션 ${i+1}`}</div>
                     <div class="r-text">${msg}</div>
                     <div class="r-footer">
-                    <button class="r-copy">복사</button>
-                    <div class="r-copied-badge">✅ 복사됨</div>
+                        <button class="r-copy">복사</button>
+                        <div class="r-copied-badge">복사됨</div>
                     </div>
-                </div>
-                `).join('')}
+                </div>`).join('')}
             `;
             setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
         }
 
-        // 💡 복사 함수 수정: 암호화된 글씨를 다시 풀어서 복사합니다.
         function copyMsg(card) {
             const text = decodeURIComponent(card.dataset.msg);
             navigator.clipboard.writeText(text).then(() => {
@@ -662,5 +633,4 @@ ${context ? `추가 설명: ${context}` : ''}
         }
     </script>
 </body>
-
 </html>
