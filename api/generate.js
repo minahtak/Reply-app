@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'Vercel에 GEMINI_API_KEY 환경변수가 없습니다!' });
     }
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     try {
         const response = await fetch(url, {
