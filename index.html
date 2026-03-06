@@ -576,7 +576,7 @@ ${context ? `추가 설명: ${context}` : ''}
 3. [메세지]`;
 
             try {
-                // 직접 Anthropic API를 부르지 않고, 내 서버(/api/generate)를 부름
+                // 직접 API를 부르지 않고, 내 Vercel 서버(/api/generate)를 부름
                 const res = await fetch("/api/generate", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -584,9 +584,20 @@ ${context ? `추가 설명: ${context}` : ''}
                 });
 
                 const data = await res.json();
-                const text = data.content?.map(c => c.text || '').join('') || '';
+
+                // 💡 추가된 부분: 서버에서 문제가 생겼다고 알려주면 콘솔에 이유를 출력합니다.
+                if (!res.ok) {
+                    console.error("서버에서 에러를 보냈어요:", data);
+                    throw new Error(data.error || "서버 에러 발생");
+                }
+
+                // 백엔드에서 보내준 텍스트를 꺼냅니다.
+                const text = data.content[0].text; 
                 renderResults(text);
+                
             } catch (e) {
+                // 💡 추가된 부분: 무슨 에러인지 브라우저 개발자 도구에 빨간 글씨로 찍어줍니다.
+                console.error("프론트엔드 에러 발생:", e); 
                 renderResults('');
             }
 
