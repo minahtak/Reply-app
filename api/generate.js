@@ -4,13 +4,12 @@ export default async function handler(req, res) {
     }
 
     const { prompt } = req.body;
-    const apiKey = process.env.GROQ_API_KEY; // Vercel에 숨겨둘 Groq 키
+    const apiKey = process.env.GROQ_API_KEY;
 
     if (!apiKey) {
         return res.status(500).json({ error: 'Vercel에 GROQ_API_KEY 환경변수가 없습니다!' });
     }
 
-    // Groq API 주소
     const url = "https://api.groq.com/openai/v1/chat/completions";
 
     try {
@@ -21,7 +20,8 @@ export default async function handler(req, res) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "llama3-70b-8192", // 메타(Meta)의 똑똑한 Llama 3 (70B) 모델
+                // 💡 여기서 서비스가 종료된 구형 모델 대신, 똑똑한 최신 모델 이름으로 변경했습니다!
+                model: "llama-3.3-70b-versatile",
                 messages: [{ role: "user", content: prompt }],
                 max_tokens: 800
             })
@@ -36,7 +36,6 @@ export default async function handler(req, res) {
 
         if (data.choices && data.choices.length > 0) {
             const generatedText = data.choices[0].message.content;
-            // 프론트엔드가 원래 읽던 방식 그대로 포장해서 전송!
             res.status(200).json({ content: [{ text: generatedText }] });
         } else {
             res.status(500).json({ error: '답장 결과가 비어있습니다.' });
