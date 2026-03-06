@@ -592,12 +592,12 @@ ${context ? `추가 설명: ${context}` : ''}
                 }
 
                 // 백엔드에서 보내준 텍스트를 꺼냅니다.
-                const text = data.content[0].text; 
+                const text = data.content[0].text;
                 renderResults(text);
-                
+
             } catch (e) {
                 // 💡 추가된 부분: 무슨 에러인지 브라우저 개발자 도구에 빨간 글씨로 찍어줍니다.
-                console.error("프론트엔드 에러 발생:", e); 
+                console.error("프론트엔드 에러 발생:", e);
                 renderResults('');
             }
 
@@ -607,19 +607,36 @@ ${context ? `추가 설명: ${context}` : ''}
         }
 
         function parseResults(text) {
+            // 1. 제미나이가 종종 쓰는 별표(**) 마크다운을 깔끔하게 제거합니다.
+            let cleanText = text.replace(/\*\*/g, '');
+
+            // 2. 가끔 줄바꿈 없이 한 줄로 쭉 쓰는 경우를 대비해 '숫자.' 앞에 강제 줄바꿈을 넣어줍니다.
+            cleanText = cleanText.replace(/\s([1-3][\.\)])/g, '\n$1');
+
             const msgs = [];
-            const lines = text.split('\n');
+            const lines = cleanText.split('\n');
             let curr = '';
-            for (const line of lines) {
-                if (/^[1-3][\.\)]\s/.test(line.trim())) {
-                    if (curr.trim()) msgs.push(curr.trim());
-                    curr = line.replace(/^[1-3][\.\)]\s*/, '').trim();
-                } else if (line.trim() && curr) {
-                    curr += ' ' + line.trim();
+
+            for (let line of lines) {
+                line = line.trim();
+                if (!line) continue; // 빈 줄은 패스
+
+                // 💡 핵심: 띄어쓰기가 없어도 숫자로 시작하면 무조건 새로운 답장으로 인식하게 수정!
+                if (/^[1-3][\.\)]\s*/.test(line)) {
+                    if (curr) msgs.push(curr); // 쓰던 게 있으면 저장
+                    curr = line.replace(/^[1-3][\.\)]\s*/, '').trim(); // 숫자 딱지 떼고 내용만 저장
+                } else {
+                    // 숫자로 시작하지 않는데 이미 쓰고 있던 내용이 있다면 이어붙입니다.
+                    // (만약 서론 쓰잘데기 없는 말이면 curr가 비어있어서 자동으로 날아갑니다👍)
+                    if (curr) curr += ' ' + line;
                 }
             }
-            if (curr.trim()) msgs.push(curr.trim());
-            return msgs.length ? msgs : [text];
+
+            // 마지막 3번째 답장도 챙겨넣기
+            if (curr) msgs.push(curr);
+
+            // 혹시라도 3개로 안 쪼개졌다면 통째로라도 보여줍니다.
+            return msgs.length > 0 ? msgs : [text];
         }
 
         function renderResults(text) {
