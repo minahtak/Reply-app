@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>대신 답장</title>
+    <link rel="manifest" href="/manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <style>
@@ -54,13 +55,21 @@
         .hdr-dot {
             width: 38px;
             height: 38px;
-            background: #1A1814;
             border-radius: 12px;
+            /* 이 둥근 모서리를 그대로 유지할게 */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 19px;
             flex-shrink: 0;
+            overflow: hidden;
+            /* 👈 추가: 이미지가 둥근 모서리 밖으로 안 삐져나가게 해줌 */
+        }
+
+        /* 👇 그 바로 아래에 이 코드를 통째로 새로 추가해! */
+        .hdr-dot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .hdr-title {
@@ -453,78 +462,79 @@
     <div class="app-container">
         <div class="scroll" id="scroll">
 
-            <div class="hdr">
-                <div class="hdr-dot">💬</div>
-                <div>
-                    <div class="hdr-title">대신 답장</div>
-                    <div class="hdr-sub">답장 귀찮을 때 AI가 써드려요</div>
-                </div>
+            <div class="hdr-dot">
+                <img src="/icon-512x512.png" alt="로고">
             </div>
-
-            <!-- 예산 초과 시 표시 -->
-            <div class="budget-banner" id="budgetBanner">
-                ⚠️ 이번 달 사용량이 한도에 도달했어요. 내달 1일에 초기화됩니다.
+            <div>
+                <div class="hdr-title">대신 답장</div>
+                <div class="hdr-sub">답장 귀찮을 때 AI가 써드려요</div>
             </div>
-
-            <div class="card">
-                <div class="card-label">받은 메세지 (선택)</div>
-                <div class="msg-input-wrap">
-                    <div class="msg-avatar">🐱</div>
-                    <!-- 최대 100자 제한 -->
-                    <textarea class="msg-bubble-input" id="receivedMsg" placeholder="상대방 메세지를 붙여넣어 주세요 (없어도 돼요)"
-                        rows="2" maxlength="100"
-                        oninput="autoResize(this); updateCharCount('receivedMsg', 'receivedCount', 100)"></textarea>
-                </div>
-                <div class="char-count" id="receivedCount">0 / 100</div>
-            </div>
-
-            <div class="card">
-                <div class="card-label">상황</div>
-                <div class="mode-wrap" id="modeWrap">
-                    <div class="mode-pill" data-mode="refuse" onclick="selectMode(this)">🙅 거절하기</div>
-                    <div class="mode-pill" data-mode="ignore" onclick="selectMode(this)">👻 읽씹 해명</div>
-                    <div class="mode-pill" data-mode="excuse" onclick="selectMode(this)">🤒 자연스러운 핑계</div>
-                    <div class="mode-pill" data-mode="end" onclick="selectMode(this)">🚪 대화 마무리</div>
-                    <div class="mode-pill" data-mode="awkward" onclick="selectMode(this)">😬 어색한 사이</div>
-                    <div class="mode-pill" data-mode="formal" onclick="selectMode(this)">💼 격식체 변환</div>
-                    <div class="mode-pill" data-mode="compliment" onclick="selectMode(this)">🥰 칭찬·관심 답장</div>
-                    <div class="mode-pill" data-mode="some" onclick="selectMode(this)">❤️ 썸 답장</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-label">말투</div>
-                <div class="tone-wrap">
-                    <div class="tone-pill active" data-tone="warm" onclick="selectTone(this)">😊 따뜻하게</div>
-                    <div class="tone-pill" data-tone="cool" onclick="selectTone(this)">😎 쿨하게</div>
-                    <div class="tone-pill" data-tone="sorry" onclick="selectTone(this)">🙏 미안하게</div>
-                    <div class="tone-pill" data-tone="cute" onclick="selectTone(this)">🐣 귀엽게</div>
-                    <div class="tone-pill" data-tone="short" onclick="selectTone(this)">⚡ 짧게</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-label">추가 설명 (선택)</div>
-                <!-- 최대 80자 제한 -->
-                <textarea class="ctx-textarea" id="ctxInput" placeholder="예) 친구가 카페 가자고 했는데 그냥 쉬고 싶어" rows="2"
-                    maxlength="80" oninput="autoResize(this); updateCharCount('ctxInput', 'ctxCount', 80)"></textarea>
-                <div class="char-count" id="ctxCount">0 / 80</div>
-            </div>
-
-            <button class="gen-btn" id="genBtn" onclick="generate()" disabled>
-                상황을 선택해주세요
-            </button>
-
-            <div class="loading-card" id="loadingCard">
-                <div class="dots"><span></span><span></span><span></span></div>
-                <div class="loading-txt">AI가 답장을 쓰고 있어요...</div>
-            </div>
-
-            <div class="results-wrap" id="resultsWrap"></div>
-            <div style="height:32px"></div>
         </div>
 
-        <div class="toast" id="toast">복사됐어요!</div>
+        <!-- 예산 초과 시 표시 -->
+        <div class="budget-banner" id="budgetBanner">
+            ⚠️ 이번 달 사용량이 한도에 도달했어요. 내달 1일에 초기화됩니다.
+        </div>
+
+        <div class="card">
+            <div class="card-label">받은 메세지 (선택)</div>
+            <div class="msg-input-wrap">
+                <div class="msg-avatar">🐱</div>
+                <!-- 최대 100자 제한 -->
+                <textarea class="msg-bubble-input" id="receivedMsg" placeholder="상대방 메세지를 붙여넣어 주세요 (없어도 돼요)" rows="2"
+                    maxlength="100"
+                    oninput="autoResize(this); updateCharCount('receivedMsg', 'receivedCount', 100)"></textarea>
+            </div>
+            <div class="char-count" id="receivedCount">0 / 100</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">상황</div>
+            <div class="mode-wrap" id="modeWrap">
+                <div class="mode-pill" data-mode="refuse" onclick="selectMode(this)">🙅 거절하기</div>
+                <div class="mode-pill" data-mode="ignore" onclick="selectMode(this)">👻 읽씹 해명</div>
+                <div class="mode-pill" data-mode="excuse" onclick="selectMode(this)">🤒 자연스러운 핑계</div>
+                <div class="mode-pill" data-mode="end" onclick="selectMode(this)">🚪 대화 마무리</div>
+                <div class="mode-pill" data-mode="awkward" onclick="selectMode(this)">😬 어색한 사이</div>
+                <div class="mode-pill" data-mode="formal" onclick="selectMode(this)">💼 격식체 변환</div>
+                <div class="mode-pill" data-mode="compliment" onclick="selectMode(this)">🥰 칭찬·관심 답장</div>
+                <div class="mode-pill" data-mode="some" onclick="selectMode(this)">❤️ 썸 답장</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">말투</div>
+            <div class="tone-wrap">
+                <div class="tone-pill active" data-tone="warm" onclick="selectTone(this)">😊 따뜻하게</div>
+                <div class="tone-pill" data-tone="cool" onclick="selectTone(this)">😎 쿨하게</div>
+                <div class="tone-pill" data-tone="sorry" onclick="selectTone(this)">🙏 미안하게</div>
+                <div class="tone-pill" data-tone="cute" onclick="selectTone(this)">🐣 귀엽게</div>
+                <div class="tone-pill" data-tone="short" onclick="selectTone(this)">⚡ 짧게</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">추가 설명 (선택)</div>
+            <!-- 최대 80자 제한 -->
+            <textarea class="ctx-textarea" id="ctxInput" placeholder="예) 친구가 카페 가자고 했는데 그냥 쉬고 싶어" rows="2"
+                maxlength="80" oninput="autoResize(this); updateCharCount('ctxInput', 'ctxCount', 80)"></textarea>
+            <div class="char-count" id="ctxCount">0 / 80</div>
+        </div>
+
+        <button class="gen-btn" id="genBtn" onclick="generate()" disabled>
+            상황을 선택해주세요
+        </button>
+
+        <div class="loading-card" id="loadingCard">
+            <div class="dots"><span></span><span></span><span></span></div>
+            <div class="loading-txt">AI가 답장을 쓰고 있어요...</div>
+        </div>
+
+        <div class="results-wrap" id="resultsWrap"></div>
+        <div style="height:32px"></div>
+    </div>
+
+    <div class="toast" id="toast">복사됐어요!</div>
     </div>
 
     <script>
@@ -682,6 +692,13 @@
             const t = document.getElementById('toast');
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 1800);
+        }
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
         }
     </script>
 </body>
