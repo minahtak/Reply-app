@@ -56,20 +56,18 @@
             width: 38px;
             height: 38px;
             border-radius: 12px;
-            /* 이 둥근 모서리를 그대로 유지할게 */
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
             overflow: hidden;
-            /* 👈 추가: 이미지가 둥근 모서리 밖으로 안 삐져나가게 해줌 */
         }
 
-        /* 👇 그 바로 아래에 이 코드를 통째로 새로 추가해! */
         .hdr-dot img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         .hdr-title {
@@ -110,18 +108,18 @@
             gap: 9px;
         }
 
+        
         .msg-avatar {
             width: 28px;
             height: 28px;
-            background: linear-gradient(135deg, #FFD166, #FF6B6B);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
-            flex-shrink: 0;
             margin-top: 2px;
         }
+
+
 
         .msg-bubble-input {
             flex: 1;
@@ -462,12 +460,14 @@
     <div class="app-container">
         <div class="scroll" id="scroll">
 
-            <div class="hdr-dot">
-                <img src="/icon-512x512.png" alt="로고">
-            </div>
-            <div>
-                <div class="hdr-title">대신 답장</div>
-                <div class="hdr-sub">답장 귀찮을 때 AI가 써드려요</div>
+            <div class="hdr">
+                <div class="hdr-dot">
+                    <img src="/icon-512x512.png" alt="아이콘">
+                </div>
+                <div>
+                    <div class="hdr-title">대신 답장</div>
+                    <div class="hdr-sub">답장 귀찮을 때 AI가 써드려요</div>
+                </div>
             </div>
         </div>
 
@@ -479,7 +479,10 @@
         <div class="card">
             <div class="card-label">받은 메세지 (선택)</div>
             <div class="msg-input-wrap">
-                <div class="msg-avatar">🐱</div>
+                <!--<div class="msg-avatar">🐱</div>-->
+                <div class="msg-avatar">
+                    <img src="/profile.webp" alt="프로필">
+                </div>
                 <!-- 최대 100자 제한 -->
                 <textarea class="msg-bubble-input" id="receivedMsg" placeholder="상대방 메세지를 붙여넣어 주세요 (없어도 돼요)" rows="2"
                     maxlength="100"
